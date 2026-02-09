@@ -1,8 +1,36 @@
 # Digits MLP Demo
 
-This repo contains a single Jupyter Notebook that trains a simple neural network on the built-in scikit-learn digits dataset.
+This project trains a simple multilayer perceptron on the scikit-learn digits dataset and exposes the model through a Flask API with a React drawing interface.
 
-## How to run
+## Project structure
 
-1. Open the notebook file `digits_mlp_demo.ipynb` in JupyterLab, Jupyter Notebook, or VS Code.
-2. Run the cells from top to bottom to load the data, train the model, and view the visualizations.
+- `backend/`: Flask API that trains and serves the digits model.
+- `frontend/`: React UI with a canvas-based drawing surface.
+- `scripts/install.sh`: Installs backend + frontend dependencies.
+- `scripts/init.sh`: Installs dependencies and starts both servers.
+
+## Quick start
+
+1. Install dependencies:
+   ```bash
+   ./scripts/install.sh
+   ```
+2. Start the project:
+   ```bash
+   ./scripts/init.sh
+   ```
+
+The backend runs on `http://localhost:5000` and the frontend runs on `http://localhost:5173`.
+
+## API
+
+- `GET /api/health`: basic health check.
+- `POST /api/predict`: send an array of 64 pixel values (8x8) to receive the predicted digit and probability distribution.
+
+Example request body:
+
+```json
+{
+  "pixels": [0, 0, 0, 4, 8, 2, 0, 0]
+}
+```
